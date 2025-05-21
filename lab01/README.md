@@ -1,0 +1,1 @@
+This is the lab in which we learned python. We made lots of triangles and learned about variables and functions.
