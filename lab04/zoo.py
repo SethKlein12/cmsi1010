@@ -13,11 +13,11 @@ def show_all_animals():
 
 
 def pet_animal(animal):
-    if animal == "Clover":
+    if animal == "clover":
         print("Clover is so happy! ❤️")
-    elif animal == "Coco":
+    elif animal == "coco":
         print("Coco the Baby Goat thanks you! 🥰")
-    elif animal == "Arno":
+    elif animal == "arno":
         print("Actually, we cannot allow you to pet Arno. ⛔️")
     else:
         print("Sorry, I don't know that animal")
@@ -30,7 +30,7 @@ print()
 
 keep_going = True#keeps the program going so you don't have to keep using python zoo.py
 while keep_going:
-    response = input("What would you like to do? ") #response has to be inside the while loop
+    response = input("What would you like to do? ").strip().lower() #response has to be inside the while loop, .strip() and .lower() make the string lowercase and remove spaces
     if response == "help":
         show_help()
     elif response == "see":
