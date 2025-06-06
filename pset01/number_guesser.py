@@ -1,34 +1,23 @@
-# ----------------------------------------------------------------------
-# This is the file number_guesser.py
+import random
+n = random.choice(range(1,1000))
+guesses = 0
+print("Welcome to Number Guesser! Guess the number between 1-1000 or type 'exit' or 'bye' to leave.")
+while True:
+    guess = input("Guess the number: ").strip().lower()
+    if guess == "exit" or guess == "bye":
+        print("Thanks for playing!")
+        break
+    elif not guess.isdigit(): print("Please enter a valid number")
 
-# The intent is to give you practice writing a complete, interactive
-# Python program.
+    elif int(guess) == n:
+        print("CONGRATS, YOU GUESSED THE NUMBER!")
+        print("Number of guesses:", guesses + 1)
+        guesses = 0
+        n = random.choice(range(1,1000))
 
-# Remove the comments in this file when you have completed your program.
-# You can, and should, include your own comments, but please remove the
-# comments that are here now.
-# ----------------------------------------------------------------------
-
-# Things to do:
-
-# Generate a random number between 1 and 1000.
-
-# Ask the user to guess the number. In your prompt, let the user know they
-# can type 'bye' or 'exit' to quit the program.
-#
-# If their guess is not made up entirely of digits, print "Please enter a valid
-# number" and ask them to guess again.
-#
-# If the guess is too high, print "Too high!" and continue asking.
-#
-# If the guess is too low, print "Too low!" and continue asking.
-#
-# If the guess is correct, print "Congratulations! You guessed the number!" along
-# with the number of attempts it took to guess the number. Start over with a new
-# random number. Make sure to zero out the number of attempts.
-
-# Please note: There are likely to be a number of Python guessing games online,
-# and most GenAI systems can probably write this for you. Don’t rely on them,
-# as they rob you of a chance to practice your Python skills and they might not
-# even be correct. Perhaps, worse, they might not follow the instructions
-# exactly as given.
+    elif int(guess) >= n:
+        print("Too high!")
+        guesses += 1
+    elif int(guess) <= n:
+        print("Too low!")
+        guesses += 1
