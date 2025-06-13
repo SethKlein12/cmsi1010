@@ -56,22 +56,12 @@ def is_subset(a, b):
 
 
 def is_disjoint(a, b):
-    """
-    Returns True if sets a and b are disjoint (i.e., have no elements in common),
-    and False otherwise. If either a or b is not a set, raise a TypeError.
-    """
     if not isinstance(a, set) or not isinstance(b, set):
         raise TypeError("Both inputs must be sets")
     return a.isdisjoint(b)
 
 
 def most_frequent_value_or_values(d):
-    """
-    Returns the value or values that appear most frequently in the
-    dictionary d. If there are multiple values with the same maximum
-    frequency, return them as a set. If d is empty, return None.
-    If d is not a dictionary, raise a TypeError.
-    """
     if not isinstance(d, dict):
         raise TypeError("Input must be a dictionary")
     if len(d) == 0:
@@ -86,11 +76,6 @@ def most_frequent_value_or_values(d):
 
 
 def key_is_in_both_dictionaries(d1, d2, key):
-    """
-    Returns True if the key is present in both dictionaries d1 and d2,
-    and False otherwise. If either d1 or d2 is not a dictionary,
-    raise a TypeError.
-    """
     if not isinstance(d1, dict) or not isinstance(d2, dict):
         raise TypeError("Inputs must be dictionaries")
     return key in d1 and key in d2
