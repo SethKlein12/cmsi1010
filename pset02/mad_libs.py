@@ -46,10 +46,10 @@ templates = [
     {"text": "My :adjective :animal learned how to :verb a :noun", "author": "Seth Klein"},
     {"text": "I was at the :place when I saw a/an :adjective :noun that made me :verb with :emotion", "author": "Seth Klein"},
     {"text": "Hello Professor :name, I cannot attend today's lecture because I have been trapped in my :room. There is an :adjective :animal between me and the door, and it will not let me leave. :adverb, :name", "author": "Seth Klein"},
-    {"text": "The camping trip was :adjective! I hiked through a :adjective forest and got to :verb in a lake, but I lost my :noun.", "author": "Seth Klein"},
-    {"text": "Today I saw a/an :animal for the first time and it wasn't what I expected. It was :adjective and had a/an :adjective :part-of-body", "author": "Seth Klein"},
+    {"text": "The camping trip was great! I hiked through a :adjective forest and got to :verb in a lake, but I lost my :noun.", "author": "Seth Klein"},
+    {"text": "Today I saw a/an :animal for the first time and it wasn't what I expected. It was :adjective and was :verb-ing.", "author": "Seth Klein"},
     {"text": "I just crushed a fitness goal. I :past-tense-verb around the :place and past the :noun too!", "author": "Seth Klein"},
-    {"text": "I have a phobia of :noun(s). If I saw one, I'd :verb away. It makes me feel so :emotion.", "author": "Seth Klein"},
+    {"text": "I have a phobia of :plural-noun. If I saw one, I'd :verb away. It makes me feel so :emotion.", "author": "Seth Klein"},
     {"text": "It's not easy owning a/an :animal. They can be :adjective and you always have to :verb after them.", "author": "Seth Klein"},
     {"text": "The prices of :plural-noun are outrageous! I bought :number of the :adjective one(s) for the price of $:number!", "author": "Seth Klein"},
     {"text": "I spend too much :verb-ing. It takes a/an :adjective amount of my time, especially since I always commute to the :place to do it.", "author": "Seth Klein"}
@@ -66,6 +66,8 @@ def get_input(p):
 
 def fill_template(template):
     placeholders = [word[1:] for word in template.split() if word.startswith(":")]
+    placeholders = [word[:-1] if word[-1] in ".,!?;" else word for word in placeholders]
+    
     user_inputs = {}
 
     for placeholder in placeholders:
