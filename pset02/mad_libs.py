@@ -43,32 +43,53 @@
 #   2. The possible "yes" answers should be stored in a set.
 import random
 templates = [
-    {"text": "My :adjective :animal learned how to :verb a :noun!", "author": "Seth Klein"},
-    {"text": "The :color :animal :action over the :adjective :plant.", "author": "Jane Doe"},
-    {"text": "A :adjective :noun danced with a :color :animal.", "author": "John Smith"},
-    {"text": "The :noun was :adverb :verb by the :color :adjective.", "author": "Emily Davis"},
-    {"text": "In the :place, a :color :animal was :verb with a :noun.", "author": "Michael Brown"},
-    {"text": "The :adjective :noun jumped over the :color fence.", "author": "Sarah Wilson"},
-    {"text": "A :color :animal and a :adjective :noun went to the :place.", "author": "David Johnson"},
-    {"text": "The :noun was so :adjective that it made everyone laugh.", "author": "Laura Lee"},
-    {"text": "A :color balloon floated over the :adjective garden.", "author": "Chris Martin"},
-    {"text": "The :animal danced gracefully under the :color sky.", "author": "Pat Taylor"},
-    {"text": "A :noun and a :adjective friend played in the park.", "author": "Kimberly Clark"}
+    {"text": "My :adjective :animal learned how to :verb a :noun", "author": "Seth Klein"},
+    {"text": "I was at the :place when I saw a/an :adjective :noun that made me :verb with :emotion", "author": "Seth Klein"},
+    {"text": "Hello Professor :name, I cannot attend today's lecture because I have been trapped in my :room. There is an :adjective :animal between me and the door, and it will not let me leave. :adverb, :name", "author": "Seth Klein"},
+    {"text": "The camping trip was :adjective! I hiked through a :adjective forest and got to :verb in a lake, but I lost my :noun.", "author": "Seth Klein"},
+    {"text": "Today I saw a/an :animal for the first time and it wasn't what I expected. It was :adjective and had a/an :adjective :part-of-body", "author": "Seth Klein"},
+    {"text": "I just crushed a fitness goal. I :past-tense-verb around the :place and past the :noun too!", "author": "Seth Klein"},
+    {"text": "I have a phobia of :noun(s). If I saw one, I'd :verb away. It makes me feel so :emotion.", "author": "Seth Klein"},
+    {"text": "It's not easy owning a/an :animal. They can be :adjective and you always have to :verb after them.", "author": "Seth Klein"},
+    {"text": "The prices of :plural-noun are outrageous! I bought :number of the :adjective one(s) for the price of $:number!", "author": "Seth Klein"},
+    {"text": "I spend too much :verb-ing. It takes a/an :adjective amount of my time, especially since I always commute to the :place to do it.", "author": "Seth Klein"}
 ]
+yes_responses = ("yes", "y", "sí", "oui", "ok")
+
+def get_input(p):
+    while True:
+        user_input = input(p).strip()
+        if len(user_input) >= 1 and len(user_input) <= 30:
+            return user_input
+        else:
+            print("Input must be between 1 and 30 characters. Please try again.")
+
+def fill_template(template):
+    placeholders = [word[1:] for word in template.split() if word.startswith(":")]
+    user_inputs = {}
+
+    for placeholder in placeholders:
+        user_inputs[placeholder] = get_input(f"Enter a(n) {placeholder}: ")
+
+    for placeholder, user_input in user_inputs.items():
+        template = template.replace(f":{placeholder}", user_input)
+
+    return template
+
 while True:
-    print("Welcome to the Mad Libs game!")
-    template = random.choice(templates)
-    word = input(f"Fill in the word for the template: {template['text']}\n")
-    word = word.strip().lower()
-    if len(word) < 1 or len(word) > 30:
-        print("Invalid input. Please enter a word between 1 and 30 characters.")
-        continue
-    for key in template['text'].split():
-        if key.startswith(':'):
-            template['text'] = template['text'].replace(key, word, 1)
-    print(f"Completed template: {template['text']}")
-    print(f"Author: {template['author']}")
-    play_again = input("Do you want to play again? (yes/no)\n").strip().lower()
-    if play_again not in {"yes", "sí", "oui"}:
+    template_entry = random.choice(templates)
+    template = template_entry["text"]
+    author = template_entry["author"]
+
+    print("Welcome to Mad Libs!")
+    print("Fill in the following words:")
+
+    template = fill_template(template)
+    print("Here's your completed story:\n")
+    print(template)
+
+    print(f"- {author}\n\n")
+    play_again = input("Do you want to play again? (yes/no): ").strip().lower()
+    if play_again not in yes_responses:
         print("Thanks for playing!")
         break

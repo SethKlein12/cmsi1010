@@ -97,14 +97,14 @@ def key_is_in_both_dictionaries(d1, d2, key):
 
 
 def word_frequencies(s):
-    words = s.split()
     freq = {}
-    if not isinstance(s, str,):
+    if not isinstance(s, str):
         raise TypeError("Input must be a string")
-    else:
-        for word in words:
-            freq[word] = freq.get(word, 0) + 1
-        return freq
+    words = s.split()
+    for word in words:
+        freq[word] = freq.get(word, 0) + 1
+    return freq
+
 
 
 class TestDataStructuresCardio(unittest.TestCase):
